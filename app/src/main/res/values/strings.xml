@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Alzira Joné</string>
+    <string name="app_subtitle">Calendário Menstrual, Fertilidade e Saúde Feminina</string>
+    <string name="app_motto">Seu ciclo. Seus dados. Seu ritmo.</string>
+    <string name="developer_name">Nduwa Kayongo</string>
+    <string name="developer_contact">942022933</string>
+    <string name="developer_email">nduwak8@gmail.com</string>
+    <string name="app_version">1.0.0</string>
+</resources>

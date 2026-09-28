@@ -1,0 +1,6 @@
+{
+  "name": "Alzira Joné",
+  "description": "Calendário Menstrual, Fertilidade e Saúde Feminina",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
