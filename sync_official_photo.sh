@@ -52,7 +52,7 @@ if [ -n "$FOUND_SOURCE" ] && [ -f "$FOUND_SOURCE" ]; then
     radius=$((size / 2))
     inner_size=$((size * 88 / 100))
     convert "$TARGET" -resize "${inner_size}x${inner_size}" \
-      -gravity center -background "#675B4B" -extent "${size}x${size}" \
+      -gravity center -background "#144A32" -extent "${size}x${size}" \
       \( -size "${size}x${size}" xc:none -fill white -draw "circle $radius,$radius $radius,0" \) \
       -alpha set -compose DstIn -composite "PNG32:$dir/ic_launcher_round.png"
   done

@@ -18,12 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.R
 import com.example.ui.theme.EmeraldDark
 import com.example.ui.theme.EmeraldLight
@@ -74,24 +76,31 @@ fun LockScreen(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(top = 40.dp)
+            modifier = Modifier.padding(top = 28.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .size(90.dp)
+                    .size(150.dp)
                     .clip(CircleShape)
-                    .border(2.5.dp, GoldAccent, CircleShape)
+                    .border(3.5.dp, GoldAccent, CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceVariant),
+                contentAlignment = Alignment.Center
             ) {
-                if (!customIconUri.isNullOrBlank()) {
-                    AsyncImage(
-                        model = customIconUri,
-                        contentDescription = "Avatar de Alzira",
+                if (customIconUri.isNullOrBlank()) {
+                    Image(
+                        painter = painterResource(id = R.drawable.official_app_identity_image),
+                        contentDescription = "Alzira Joné - Identidade Oficial",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
                 } else {
-                    Image(
-                        painter = painterResource(id = R.drawable.official_app_identity_image),
+                    AsyncImage(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(customIconUri)
+                            .crossfade(true)
+                            .error(R.drawable.official_app_identity_image)
+                            .fallback(R.drawable.official_app_identity_image)
+                            .build(),
                         contentDescription = "Alzira Joné - Identidade Oficial",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
@@ -99,7 +108,7 @@ fun LockScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             Text(
                 text = "ALZIRA JONÉ",

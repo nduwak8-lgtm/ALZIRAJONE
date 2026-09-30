@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.R
 import com.example.data.local.entity.UserProfile
 import com.example.ui.theme.EmeraldDark
@@ -91,20 +92,27 @@ fun AboutScreen(
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(130.dp)
+                            .size(200.dp)
                             .clip(CircleShape)
-                            .border(3.dp, GoldAccent, CircleShape)
+                            .border(4.dp, GoldAccent, CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant),
+                        contentAlignment = Alignment.Center
                     ) {
-                        if (!profile.customIconUri.isNullOrBlank()) {
-                            AsyncImage(
-                                model = profile.customIconUri,
-                                contentDescription = "Ícone selecionado da galeria",
+                        if (profile.customIconUri.isNullOrBlank()) {
+                            Image(
+                                painter = painterResource(id = R.drawable.official_app_identity_image),
+                                contentDescription = "Alzira Joné - Identidade Oficial",
                                 modifier = Modifier.fillMaxSize(),
                                 contentScale = ContentScale.Crop
                             )
                         } else {
-                            Image(
-                                painter = painterResource(id = R.drawable.official_app_identity_image),
+                            AsyncImage(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(profile.customIconUri)
+                                    .crossfade(true)
+                                    .error(R.drawable.official_app_identity_image)
+                                    .fallback(R.drawable.official_app_identity_image)
+                                    .build(),
                                 contentDescription = "Alzira Joné - Identidade Oficial",
                                 modifier = Modifier.fillMaxSize(),
                                 contentScale = ContentScale.Crop
@@ -112,7 +120,7 @@ fun AboutScreen(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(14.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
                         text = "ALZIRA JONÉ",
